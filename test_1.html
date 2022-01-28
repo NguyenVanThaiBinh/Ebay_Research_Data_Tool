@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test File</title>
+</head>
+<body>
+    <script>
+        $('.vip').each(function(){
+	        var item = $( this ).text();
+            var regex_1 = item.replace(/[^a-zA-Z ]/g, "")
+            var tesst = regex_1.replace(/ +(?= )/g, '');
+            var count = 0;
+            let char_index = 0;
+            for (var i = 0; i < tesst.length; i++) {
+                if (tesst.charAt(i) == ' ') {
+                    count++;
+
+                }
+                if (count == 4) {
+                    char_index = i;
+
+                }
+            }
+            if (count <= 3) {
+                alert("can't not find!!!")
+
+            }
+            if (tesst.includes("xLP")) {
+                tesst = tesst.replace('xLP',' ')                        
+            }
+            //check country
+            if (tesst.includes("US")) {
+                tesst = tesst.substring(0, char_index - 1);
+                tesst = tesst + " US"
+                console.log(tesst)
+            }
+            if (tesst.includes("UK")) {
+                tesst = tesst.substring(0, char_index - 1);
+                tesst = tesst + " UK"
+                console.log(tesst)
+            }
+            if (tesst.includes("JAPAN")) {
+                tesst = tesst.substring(0, char_index - 1);
+                tesst = tesst + " JAPAN"
+                console.log(tesst)
+            }
+
+            
+        })
+    </script>
+</body>
+</html>
