@@ -11,63 +11,68 @@
 <body>
     <h1 id="answer"></h1>
     <script>
-        // $('.vip').each(function() {
-        //  var item = $(this).text();
-        var item = "Jamiroquai - Synkronized '99 LP UK UK ORG!! Gatefold sleeve"
-        var regex_1 = item.replace(/[^a-zA-Z ]/g, "")
-        var tesst = regex_1.replace(/ +(?= )/g, '');
-        var count = 0;
-        let char_index = 0;
-        for (var i = 0; i < tesst.length; i++) {
-            if (tesst.charAt(i) == ' ') {
-                count++;
+        $('.vip').each(function() {
+            var item = $(this).text();
+            // var item = "N.W.A - 100 Miles And Runnin' '90 EP US ORG!! Eazy-E Dr.Dre Ice Cube"
+            var regex_1 = item.replace(/[^a-zA-Z ]/g, "")
+            var tesst = regex_1.replace(/ +(?= )/g, '');
+            var count = 0;
+            let char_index = 0;
+            for (var i = 0; i < tesst.length; i++) {
+                if (tesst.charAt(i) == ' ') {
+                    count++;
+                }
+                if (count == 4) {
+                    char_index = i;
+                }
+            }
+            if (count <= 3) {
+                alert("can't not find!!!")
+                tesst = ''
+            }
+            if (tesst.includes("xLP")) {
+                tesst = tesst.replace('xLP', ' ')
+            }
+            if (tesst.includes("LP")) {
+                tesst = tesst.replace('LP', ' ')
+            }
+            //check country
+            if (tesst.includes("US")) {
+                tesst = tesst.substring(0, char_index + 1);
+                tesst = tesst.replace('US', '')
+                tesst = tesst + " US"
+            }
+            if (tesst.includes("UK")) {
+                tesst = tesst.substring(0, char_index + 1);
+                tesst = tesst.replace("UK", '')
+                tesst = tesst + " UK"
+            }
+            if (tesst.includes("JAPAN")) {
+                tesst = tesst.substring(0, char_index + 1);
+                tesst = tesst.replace('JAPAN', '')
+                tesst = tesst + " JAPAN"
+            }
+            if (tesst.includes("EU")) {
+                tesst = tesst.substring(0, char_index + 1);
+                tesst = tesst.replace('EU', '')
+                tesst = tesst + " EU"
+            }
+            if (tesst.includes("ITALY")) {
+                tesst = tesst.substring(0, char_index + 1);
+                tesst = tesst.replace('ITALY', '')
+                tesst = tesst + " ITALY"
 
             }
-            if (count == 4) {
-                char_index = i;
 
-            }
-        }
-        if (count <= 3) {
-            alert("can't not find!!!")
-            tesst = ''
-        }
-        if (tesst.includes("xLP")) {
-            tesst = tesst.replace('xLP', ' ')
-        }
-        //check country
-        if (tesst.includes("US")) {
-            tesst = tesst.substring(0, char_index + 1);
-            tesst = tesst.replace('US', '')
-            tesst = tesst + " US"
-
-        }
-        if (tesst.includes("UK")) {
-            tesst = tesst.substring(0, char_index + 1);
-            tesst = tesst.replace('UK', '')
-            tesst = tesst + " UK"
-
-        }
-        if (tesst.includes("JAPAN")) {
-            tesst = tesst.substring(0, char_index + 1);
-            tesst = tesst.replace('JAPAN', '')
-            tesst = tesst + " JAPAN"
-        }
-        if (tesst.includes("EU")) {
-            tesst = tesst.substring(0, char_index + 1);
-            tesst = tesst.replace('EU', '')
-            tesst = tesst + " EU"
-        }
-
-        //handling string second time
-        tesst = tesst.replace(/ +(?= )/g, '');
-        tesst = tesst.replace("ORG", '');
+            //handling string second time
+            tesst = tesst.replace(/ +(?= )/g, '');
+            tesst = tesst.replace("ORG", '');
 
 
-        // console.log(tesst)
-        document.getElementById("answer").innerHTML = "The answer: " + tesst;
+            console.log(tesst)
+                // document.getElementById("answer").innerHTML = "The answer: " + tesst;
 
-        //  })
+        })
     </script>
 </body>
 
