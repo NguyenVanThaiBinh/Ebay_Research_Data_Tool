@@ -11,12 +11,12 @@
 <body>
     <h1>You can Read anything you like!</h1>
     <input type="file" id="upload" name="upload">
-    <br>
+    <br><br><br>
     <script>
         //init array links
         const list_link = [];
         //Change page
-        let test_url = "https://www.ebay.com/sh/research?marketplace=EBAY-US&keywords=Gang+Starr+The+Ownerz+The+US&dayRange=90&endDate=1643616076244&startDate=1635836476244&categoryId=0&conditionId=3000&format=FIXED_PRICE&sellerCountry=SellerLocation%3A%3A%3AJP&sellerCountry=SellerLocation%3A%3A%3AJP&sellerCountry=SellerLocation%3A%3A%3AJP&offset=0&limit=50&tabName=SOLD&tz=Asia%2FBangkok"
+        let test_url = "https://www.ebay.com/sh/research?marketplace=EBAY-US&keywords=A+Tribe+Called+Quest+The+US+93&dayRange=90&endDate=1644120614593&startDate=1636344614593&categoryId=0&conditionId=3000&format=FIXED_PRICE&sellerCountry=SellerLocation%3A%3A%3AJP&sellerCountry=SellerLocation%3A%3A%3AJP&offset=0&limit=50&tabName=SOLD&tz=Asia%2FBangkok"
         var count = 0;
         let position_1 = 0;
         let position_2 = 0;
@@ -48,12 +48,18 @@
                     // test_url = test_url.slice(0, position_1) + lines[line].substring(9, lines[line].length - 1) + test_url.slice(position_2, test_url.length)
 
                     let url = (test_url.slice(0, position_1) + lines[line].substring(9, lines[line].length - 1) + test_url.slice(position_2, test_url.length));
+                    // console.log(url);
                     list_link.push(url);
                 }
                 console.log(list_link);
 
-                // window.location.replace(list_link[4]);
-
+                list_link.forEach(i => {
+                    if (list_link[list_link.length - 1] === i) {
+                        return;
+                    }
+                    window.open(i, i)
+                })
+                list_link = [];
 
             }
         })
