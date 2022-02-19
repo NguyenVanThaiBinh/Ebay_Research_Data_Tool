@@ -14,9 +14,9 @@
     <br><br><br>
     <script>
         //init array links
-        const list_link = [];
+        let list_link = [];
         //Change page
-        let test_url = "https://www.ebay.com/sh/research?marketplace=EBAY-US&keywords=A+Tribe+Called+Quest+The+US+93&dayRange=90&endDate=1644120614593&startDate=1636344614593&categoryId=0&conditionId=3000&format=FIXED_PRICE&sellerCountry=SellerLocation%3A%3A%3AJP&sellerCountry=SellerLocation%3A%3A%3AJP&offset=0&limit=50&tabName=SOLD&tz=Asia%2FBangkok"
+        let test_url = "https://www.ebay.com/sh/research?marketplace=EBAY-US&keywords=+SIGMA+AF+TELE+400mm+F%2F5.6+MULTI-COATED+for+Pentax+&dayRange=90&endDate=1645106033032&startDate=1637330033032&categoryId=0&conditionId=3000&format=FIXED_PRICE&sellerCountry=SellerLocation%3A%3A%3AJP&offset=0&limit=50&tabName=SOLD&tz=Asia%2FBangkok"
         var count = 0;
         let position_1 = 0;
         let position_2 = 0;
@@ -34,8 +34,6 @@
 
         }
 
-
-
         //upload file
         let upload = document.getElementById("upload")
         upload.addEventListener("change", () => {
@@ -45,20 +43,18 @@
             fr.onload = () => {
                 var lines = fr.result.split('\n');
                 for (var line = 0; line < lines.length; line++) {
-                    // test_url = test_url.slice(0, position_1) + lines[line].substring(9, lines[line].length - 1) + test_url.slice(position_2, test_url.length)
-
                     let url = (test_url.slice(0, position_1) + lines[line].substring(9, lines[line].length - 1) + test_url.slice(position_2, test_url.length));
-                    // console.log(url);
                     list_link.push(url);
                 }
                 console.log(list_link);
 
                 list_link.forEach(i => {
-                    if (list_link[list_link.length - 1] === i) {
-                        return;
-                    }
-                    window.open(i, i)
-                })
+                        if (list_link[list_link.length] === i) {
+                            return;
+                        }
+                        window.open(i, i)
+                    })
+                    //clearn array
                 list_link = [];
 
             }
