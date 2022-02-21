@@ -13,7 +13,6 @@
     <script>
         $('.vip').each(function() {
             var item = $(this).text();
-            // var item = "Mack 10 - Mack 10 '95 2xLP US ORG!! Ice Cube WC K-Dee"
             var regex_1 = item.replace(/[^a-zA-Z ]/g, "")
             var tesst = regex_1.replace(/ +(?= )/g, '');
             var count = 0;
@@ -57,7 +56,6 @@
                 }
             }
             console.log(tesst)
-                // document.getElementById("answer").innerHTML = "The answer: " + tesst;
         })
     </script>
 </body>
