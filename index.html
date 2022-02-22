@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Txt File</title>
+    <style>
+        body {
+            padding: auto;
+            margin: auto;
+            text-align: center;
+        }
+        
+        .custom-file-upload {
+            border: 2px solid #ccc;
+            display: inline-block;
+            padding: 10px 25px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>You can Read anything you like!</h1>
+    <br>
+    <input id="tera_link" style="height: 30px;width: 750px;" type="text" placeholder="Input your already terapeak link...">
+    <br><br><br>
+    <label for="file-upload" class="custom-file-upload">
+        <i class="fa fa-cloud-upload"></i> Upload file here
+      </label>
+    <input id="file-upload" name='upload_cont_img' type="file" style="display:none;">
+    <br><br><br>
+    <button id="btn_1" onclick="read_file_txt(1,11)">Read 01-10</button>
+    <br><br><br>
+    <button id="btn_2" onclick="read_file_txt(10,20)">Read 10-20</button>
+    <br><br><br>
+    <button id="btn_3" onclick="read_file_txt(20,30)">Read 21-30</button>
+    <br><br><br>
+    <button id="btn_4" onclick="read_file_txt(1,11)">Read 31-40</button>
+    <br><br><br>
+    <button id="btn_5" onclick="read_file_txt(10,20)">Read 41-50</button>
+    <br><br><br>
+    <button id="btn_6" onclick="read_file_txt(20,30)">Read 51-60</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        //button change file
+        $('#file-upload').change(function() {
+            var i = $(this).prev('label').clone();
+            var file = $('#file-upload')[0].files[0].name;
+            $(this).prev('label').text(file);
+            $('#btn_1').prop('disabled', false);
+            $('#btn_2').prop('disabled', false);
+            $('#btn_3').prop('disabled', false);
+            $('#btn_4').prop('disabled', false);
+            $('#btn_5').prop('disabled', false);
+            $('#btn_6').prop('disabled', false);
+        });
+
+        $('#btn_1').prop('disabled', true);
+        $('#btn_2').prop('disabled', true);
+        $('#btn_3').prop('disabled', true);
+        $('#btn_4').prop('disabled', true);
+        $('#btn_5').prop('disabled', true);
+        $('#btn_6').prop('disabled', true);
+
+        //upload file
+        function read_file_txt(index_1, index_2) {
+            //init array links
+            let list_link = [20];
+            let count_length = 0;
+            //Change page
+            let test_url = $('#tera_link').val();
+            if (test_url == '') {
+                alert('Please input tera link!!!')
+                $('#btn_1').prop('disabled', true);
+                $('#btn_2').prop('disabled', true);
+                $('#btn_3').prop('disabled', true);
+                $('#btn_4').prop('disabled', true);
+                $('#btn_5').prop('disabled', true);
+                $('#btn_6').prop('disabled', true);
+                $('#tera_link').focus();
+                return;
+            }
+            var count = 0;
+            let position_1 = 0;
+            let position_2 = 0;
+            for (var i = 0; i < test_url.length; i++) {
+
+                if (test_url.charAt(i) == '=') {
+                    count++;
+                }
+                if (count == 1) {
+                    position_1 = i + 2;
+                }
+                if (count == 2) {
+                    position_2 = i - 8;
+                }
+
+            }
+            let upload = document.getElementById("file-upload");
+            let fr = new FileReader();
+            fr.readAsText(upload.files[0]);
+
+            fr.onload = () => {
+                var lines = fr.result.split('\n');
+                if (index_2 >= lines.length) {
+                    index_2 = lines.length;
+
+                }
+                for (var line = index_1; line < index_2; line++) {
+                    let url = (test_url.slice(0, position_1) + lines[line].substring(9, lines[line].length - 1) + test_url.slice(position_2, test_url.length));
+                    count_length++;
+                    if (list_link.length <= 19) {
+                        list_link.push(url);
+                    }
+                }
+                console.log(list_link);
+
+                list_link.forEach(i => {
+                        if (list_link[list_link.length] === i) {
+                            return;
+                        }
+                        window.open(i, i)
+                    })
+                    //clearn array
+                list_link = [];
+                count_length = 0;
+
+            }
+        }
+    </script>
+</body>
+
+</html>
