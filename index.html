@@ -31,17 +31,17 @@
         <i class="fa fa-cloud-upload"></i> Upload file here
       </label>
     <input id="file-upload" name='upload_cont_img' type="file" style="display:none;">
-    <br><br><br>
+    <br><br>
     <button id="btn_1" onclick="read_file_txt(0,10)">Read 01-10</button>
-    <br><br><br>
+    <br><br>
     <button id="btn_2" onclick="read_file_txt(10,20)">Read 10-20</button>
-    <br><br><br>
+    <br><br>
     <button id="btn_3" onclick="read_file_txt(20,30)">Read 21-30</button>
-    <br><br><br>
+    <br><br>
     <button id="btn_4" onclick="read_file_txt(30,40)">Read 31-40</button>
-    <br><br><br>
+    <br><br>
     <button id="btn_5" onclick="read_file_txt(40,50)">Read 41-50</button>
-    <br><br><br>
+    <br><br>
     <button id="btn_6" onclick="read_file_txt(50,60)">Read 51-60</button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
@@ -67,19 +67,33 @@
 
         //upload file
         function read_file_txt(index_1, index_2) {
+            //change color
+            switch (index_1) {
+                case 0:
+                    $('#btn_1').css("color", "red");
+                    break;
+                case 10:
+                    $('#btn_2').css("color", "red");
+                    break;
+                case 20:
+                    $('#btn_3').css("color", "red");
+                    break;
+                case 30:
+                    $('#btn_4').css("color", "red");
+                    break;
+                case 40:
+                    $('#btn_5').css("color", "red");
+                    break;
+                default:
+                    $('#btn_6').css("color", "red");
+            }
             //init array links
             let list_link = [];
             let count_length = 0;
             //Change page
             let test_url = $('#tera_link').val();
-            if (test_url == '') {
-                alert('Please input tera link!!!')
-                $('#btn_1').prop('disabled', true);
-                $('#btn_2').prop('disabled', true);
-                $('#btn_3').prop('disabled', true);
-                $('#btn_4').prop('disabled', true);
-                $('#btn_5').prop('disabled', true);
-                $('#btn_6').prop('disabled', true);
+            if (test_url.length < 30) {
+                alert('Please input real tera link!!!')
                 $('#tera_link').focus();
                 return;
             }
@@ -116,8 +130,6 @@
                         list_link.push(url);
                     }
                 }
-                //  console.log(list_link);
-
                 list_link.forEach(i => {
                         if (list_link[list_link.length] === i) {
                             return;
